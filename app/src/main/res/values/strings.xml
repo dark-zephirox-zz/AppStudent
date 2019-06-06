@@ -4,13 +4,17 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-
+    <string name="title_login">Ingreso a la Aplicación</string>
     <string name="welcome">Bienvenido, accede a las opciones desde el menú lateral</string>
-    <string name="app_name">AppStudent</string>
+    <string name="app_name">App Student</string>
     <string name="log_out">Cerrar Sesión</string>
     <string name="menu_itinerario">Itinerario</string>
     <string name="menu_notas">Notas</string>
     <string name="menu_estadisticas">Estadísticas</string>
     <string name="menu_grabadora">Grabadora</string>
     <string name="item_herramientas">Herramientas</string>
+    <string name="username_login">Usuario</string>
+    <string name="password_login">Contraseña</string>
+    <string name="register_login">Registrate!</string>
+    <string name="signin_login">Ingresa!</string>
 </resources>
