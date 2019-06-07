@@ -5,15 +5,15 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_itinerario"
+            android:id="@+id/menu_itinerario"
             android:icon="@drawable/ic_event_note"
             android:title="@string/menu_itinerario" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/menu_notas"
             android:icon="@drawable/ic_library_books"
             android:title="@string/menu_notas" />
         <item
-            android:id="@+id/nav_estadisticas"
+            android:id="@+id/menu_estadisticas"
             android:icon="@drawable/ic_show_chart"
             android:title="@string/menu_estadisticas" />
     </group>
@@ -21,7 +21,7 @@
     <item android:title="@string/item_herramientas">
         <menu>
             <item
-                android:id="@+id/nav_slideshow"
+                android:id="@+id/menu_grabadora"
                 android:icon="@drawable/ic_mic"
                 android:title="@string/menu_grabadora" />
         </menu>

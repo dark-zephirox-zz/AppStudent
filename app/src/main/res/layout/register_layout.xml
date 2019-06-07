@@ -18,6 +18,7 @@
             android:layout_height="98dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_grades" />
 
         <!--  Name Label -->
@@ -26,11 +27,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_name"
+
+            <EditText
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="Name" />
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/user_name"
+                android:inputType="textPersonName" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Email Label -->
@@ -39,11 +43,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_email"
+
+            <EditText
+                android:id="@+id/document_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/username_login"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -52,11 +59,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_password"
+
+            <EditText
+                android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Password"/>
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/password_login"
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->
@@ -66,16 +76,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:fontFamily="@font/open_sans"
             android:padding="12dp"
-            android:text="Create Account"/>
-
-        <TextView android:id="@+id/link_login"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Already a member? Login"
-            android:gravity="center"
-            android:textSize="16dip"/>
+            android:text="@string/create_user" />
 
     </LinearLayout>
 </ScrollView>

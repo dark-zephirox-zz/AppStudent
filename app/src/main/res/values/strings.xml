@@ -13,8 +13,14 @@
     <string name="menu_estadisticas">Estadísticas</string>
     <string name="menu_grabadora">Grabadora</string>
     <string name="item_herramientas">Herramientas</string>
-    <string name="username_login">Usuario</string>
+    <string name="username_login">Nº Documento</string>
     <string name="password_login">Contraseña</string>
     <string name="register_login">Registrate!</string>
     <string name="signin_login">Ingresa!</string>
+    <string name="user_name">Nombre</string>
+    <string name="create_user">Crear Usuario!</string>
+    <string name="title_itinerario">Itinerarios</string>
+    <string name="title_notas">Calculo y Registro de Notas</string>
+    <string name="title_estadisticas">Estadisticas de Notas</string>
+    <string name="title_grabadora">Grabadora de Audio</string>
 </resources>
