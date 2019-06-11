@@ -1,5 +1,6 @@
 package com.codeworks.appstudent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity 
@@ -29,10 +31,19 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Usuario en el sistema: Administrador", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+        FloatingActionButton fab_itin = findViewById(R.id.fab_itinerario);
+        fab_itin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent crdItinerario = new Intent(v.getContext(), CrdItinerarioActivity.class);
+                startActivity(crdItinerario);
+            }
+        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

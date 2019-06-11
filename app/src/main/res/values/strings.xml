@@ -23,4 +23,7 @@
     <string name="title_notas">Calculo y Registro de Notas</string>
     <string name="title_estadisticas">Estadisticas de Notas</string>
     <string name="title_grabadora">Grabadora de Audio</string>
+    <string name="name_itinerario">Nombre de Itinerario</string>
+    <string name="save">Guardar</string>
+    <string name="delete">Eliminar</string>
 </resources>
