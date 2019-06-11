@@ -57,8 +57,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#FF4081"
+                    android:fontFamily="@font/open_sans"
                     android:hint="@string/username_login"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -72,17 +73,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableTint="#FF4081"
+                    android:fontFamily="@font/open_sans"
                     android:hint="@string/password_login"
                     android:inputType="textPassword"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
+                android:id="@+id/txtRegistrate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:fontFamily="@font/open_sans"
                 android:paddingTop="5dp"
-                android:text="@string/register_login" />
+                android:text="@string/register_login"
+                android:textColor="#168AE6"
+                android:textStyle="bold" />
 
 
             <Button
@@ -91,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
                 android:background="#4345E0"
+                android:fontFamily="@font/open_sans"
                 android:text="@string/signin_login"
                 android:textAllCaps="false"
                 android:textColor="#fff"
