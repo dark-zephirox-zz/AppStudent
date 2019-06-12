@@ -1,5 +1,6 @@
 package com.codeworks.appstudent;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_log_out) {
             return true;
         }
 
