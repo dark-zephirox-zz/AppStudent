@@ -97,7 +97,8 @@
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/open_sans"
             android:padding="12dp"
-            android:text="@string/create_user" />
+            android:text="@string/create_user"
+            android:onClick="regUsuario"/>
 
     </LinearLayout>
 </ScrollView>
