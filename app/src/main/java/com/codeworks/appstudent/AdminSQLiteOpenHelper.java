@@ -12,8 +12,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE usuarios (id INT PRIMARY KEY, nombre_usuario TEXT, documento TEXT, password TEXT, telefono INT)");
-        db.execSQL("CREATE TABLE itinerarios (id INT PRIMARY KEY, nombre_itinerario TEXT, fecha_itinerario DATE)");
-        db.execSQL("CREATE TABLE notas (id INT PRIMARY KEY, nombre_materia TEXT, nota1 DECIMAL(10,2), nota2 DECIMAL(10,2), nota3 DECIMAL(10,2))");
+        db.execSQL("CREATE TABLE itinerarios (id INT PRIMARY KEY,id_documento TEXT, nombre_itinerario TEXT, fecha_itinerario DATE)");
+        db.execSQL("CREATE TABLE notas (id INT PRIMARY KEY, id_documento TEXT, nombre_materia TEXT, nota1 DECIMAL(10,2), nota2 DECIMAL(10,2), nota3 DECIMAL(10,2))");
         db.execSQL("CREATE TABLE grabaciones (id INT PRIMARY KEY, nombre_grabacion TEXT, ruta_ubicacion TEXT)");
     }
     @Override
