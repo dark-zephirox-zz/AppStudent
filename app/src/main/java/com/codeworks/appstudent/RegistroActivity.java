@@ -21,7 +21,7 @@ public class RegistroActivity extends AppCompatActivity {
         et4 = (EditText) findViewById(R.id.user_phone);
     }
     public void regUsuario (View v){
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registro", null, 1);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
         String username = et1.getText().toString();
         String docnumber = et2.getText().toString();

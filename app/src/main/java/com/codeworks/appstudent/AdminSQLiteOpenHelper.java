@@ -5,8 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
-    public AdminSQLiteOpenHelper(Context context, String name,
-                                 SQLiteDatabase.CursorFactory factory, int version) {
+    public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
     @Override
@@ -17,8 +16,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE grabaciones (id INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario INTEGER,nombre_grabacion TEXT, ruta_ubicacion TEXT)");
     }
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int
-            newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
 }
