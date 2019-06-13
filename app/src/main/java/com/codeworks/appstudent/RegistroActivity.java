@@ -27,7 +27,7 @@ public class RegistroActivity extends AppCompatActivity {
         String docnumber = et2.getText().toString();
         String password = et3.getText().toString();
         String phone = et4.getText().toString();
-        if (username.matches("" )||docnumber.matches("")||password.matches("")||phone.matches("")){
+        if (username.matches("" ) || docnumber.matches("") || password.matches("") || phone.matches("")){
             Toast.makeText(this, "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }else{
