@@ -4,5 +4,6 @@
     <item android:id="@+id/action_log_out"
         android:title="@string/log_out"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="logOut"/>
 </menu>

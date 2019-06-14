@@ -11,7 +11,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-
+import android.content.SharedPreferences;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,18 +22,28 @@ import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity 
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    SharedPreferences sharedpreferences;
+    String idusuario;
+    String nomusuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sharedpreferences = getSharedPreferences("pref",Context.MODE_PRIVATE);
+        if (sharedpreferences.contains("IdUsuario")) {
+            idusuario = sharedpreferences.getString("IdUsuario", "");
+        }
+        if (sharedpreferences.contains("NomUsuario")) {
+            nomusuario = sharedpreferences.getString("NomUsuario", "");
+        }
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Usuario en el sistema: Administrador", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Usuario en el sistema: "+nomusuario, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -111,5 +122,13 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void logOut(MenuItem item){
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("IdUsuario", "");
+        editor.putString("NomUsuario", "");
+        editor.commit();
+        /*Intent intent = new Intent(item.get, LoginActivity.class);
+        startActivity(intent);*/
     }
 }

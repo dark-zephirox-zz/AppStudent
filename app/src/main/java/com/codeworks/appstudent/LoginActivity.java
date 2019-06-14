@@ -1,5 +1,6 @@
 package com.codeworks.appstudent;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+        sharedpreferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
         et1 = (EditText) findViewById(R.id.document_login);
         et2 = (EditText) findViewById(R.id.password_login);
         Button btnContinue = findViewById(R.id.login_button);
@@ -45,15 +47,17 @@ public class LoginActivity extends AppCompatActivity {
         if (document.matches("") || password.matches("")){
             Toast.makeText(this, "Por favor, diligenciar todos los campos", Toast.LENGTH_SHORT).show();
         }else {
-            Cursor fila = bd.rawQuery("SELECT id FROM usuarios WHERE documento='" + document + "' AND password='" + password +"'", null);
+            Cursor fila = bd.rawQuery("SELECT id, nombre_usuario FROM usuarios WHERE documento='" + document + "' AND password='" + password +"'", null);
             if (fila.moveToFirst()) {
-                //guardar idusuario y nomusuario en sharedpreferences
-                Toast.makeText(this, fila.getString(1), Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("IdUsuario", et1.getText().toString());
+                editor.putString("NomUsuario", et2.getText().toString());
+                editor.commit();
                 et1.setText("");
                 et2.setText("");
                 Intent mainIntent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(mainIntent);
-                //Toast.makeText(this, "Ingreso exitoso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Ingreso exitoso", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Credenciales incorrectas, intentalo de nuevo!", Toast.LENGTH_SHORT).show();
             }
