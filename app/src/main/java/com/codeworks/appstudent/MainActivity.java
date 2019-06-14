@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Usuario en el sistema: "+nomusuario, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Usuario: "+nomusuario, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -77,12 +77,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        Toast.makeText(this, "Presione nuevamente para salir", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -91,11 +86,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_log_out) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -117,18 +107,17 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.menu_grabadora) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(4);
+        } else if (id == R.id.menu_logout) {
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("IdUsuario", "");
+            editor.putString("NomUsuario", "");
+            editor.commit();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-    public void logOut(MenuItem item){
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("IdUsuario", "");
-        editor.putString("NomUsuario", "");
-        editor.commit();
-        /*Intent intent = new Intent(item.get, LoginActivity.class);
-        startActivity(intent);*/
     }
 }

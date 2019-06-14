@@ -16,14 +16,18 @@
             android:id="@+id/menu_estadisticas"
             android:icon="@drawable/ic_show_chart"
             android:title="@string/menu_estadisticas" />
+        <item
+            android:id="@+id/menu_grabadora"
+            android:icon="@drawable/ic_mic"
+            android:title="@string/menu_grabadora" />
     </group>
 
-    <item android:title="@string/item_herramientas">
+    <item android:title="@string/item_acciones">
         <menu>
             <item
-                android:id="@+id/menu_grabadora"
-                android:icon="@drawable/ic_mic"
-                android:title="@string/menu_grabadora" />
+                android:id="@+id/menu_logout"
+                android:icon="@drawable/ic_phonelink_erase"
+                android:title="@string/log_out"/>
         </menu>
     </item>
 

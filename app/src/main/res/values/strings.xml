@@ -12,7 +12,7 @@
     <string name="menu_notas">Notas</string>
     <string name="menu_estadisticas">Estadísticas</string>
     <string name="menu_grabadora">Grabadora</string>
-    <string name="item_herramientas">Herramientas</string>
+    <string name="item_acciones">Acciones</string>
     <string name="username_login">Nº Documento</string>
     <string name="password_login">Contraseña</string>
     <string name="register_login">Registrate!</string>
