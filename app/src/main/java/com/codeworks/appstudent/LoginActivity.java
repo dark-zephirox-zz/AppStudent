@@ -40,18 +40,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void logIn (View v){
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
-        SQLiteDatabase bd = admin.getWritableDatabase();
         String document = et1.getText().toString();
         String password = et2.getText().toString();
         if (document.matches("") || password.matches("")){
             Toast.makeText(this, "Por favor, diligenciar todos los campos", Toast.LENGTH_SHORT).show();
         }else {
-            Cursor fila = bd.rawQuery("SELECT id, nombre_usuario FROM usuarios WHERE documento='" + document + "' AND password='" + password +"'", null);
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+            SQLiteDatabase db = admin.getWritableDatabase();
+            Cursor fila = db.rawQuery("SELECT id, nombre_usuario FROM usuarios WHERE documento='" + document + "' AND password='" + password +"'", null);
             if (fila.moveToFirst()) {
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString("IdUsuario", et1.getText().toString());
-                editor.putString("NomUsuario", et2.getText().toString());
+                editor.putString("IdUsuario", fila.getString(fila.getColumnIndex("id")));
+                editor.putString("NomUsuario", fila.getString(fila.getColumnIndex("nombre_usuario")));
                 editor.commit();
                 et1.setText("");
                 et2.setText("");

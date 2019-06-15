@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans"
                     android:hint="@string/user_name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName|text" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Email Label -->

@@ -26,7 +26,7 @@
         android:fontFamily="@font/open_sans"
         android:gravity="center_horizontal"
         android:text="@string/title_login"
-        android:textColor="#fff"
+        android:textColor="#3949AB"
         android:textSize="26sp"
         android:textStyle="bold" />
 

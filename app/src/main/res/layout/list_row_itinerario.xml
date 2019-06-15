@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/list_name_itinerario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/list_date_itinerario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_name_itinerario"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="#343434"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/list_id_itinerario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/list_date_itinerario"
+        android:layout_alignBottom="@+id/list_date_itinerario"
+        android:layout_alignParentRight="true"
+        android:textColor="#343434"
+        android:textSize="14dp" />
+</RelativeLayout>

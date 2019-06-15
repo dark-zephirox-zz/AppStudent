@@ -2,6 +2,8 @@ package com.codeworks.appstudent;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,10 +17,17 @@ import android.content.SharedPreferences;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity 
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,8 +64,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(crdItinerario);
             }
         });
-
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,9 +71,14 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
         ViewFlipper vf = findViewById(R.id.vf);
         vf.setDisplayedChild(0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadItinerarios();
     }
 
     @Override
@@ -74,30 +86,22 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
-        Toast.makeText(this, "Presione nuevamente para salir", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.menu_itinerario) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(1);
+            loadItinerarios();
         } else if (id == R.id.menu_notas) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(2);
@@ -115,9 +119,38 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void loadItinerarios(){
+        ArrayList<HashMap<String, String>> itinerarioList = new ArrayList<>();
+        ListView listItinerario = (ListView) findViewById(R.id.list_itinerarios);
+        listItinerario.setAdapter(null);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        Cursor fila = db.rawQuery("SELECT id, nombre_itinerario, fecha_itinerario FROM  itinerarios WHERE id_usuario="+idusuario , null);
+        if (fila.moveToFirst()) {
+            while (!fila.isAfterLast()) {
+                final HashMap<String,String> itinerario = new HashMap<>();
+                String id = fila.getString(fila.getColumnIndex("id"));
+                String nombre_itinerario = fila.getString(fila.getColumnIndex("nombre_itinerario"));
+                String fecha_itinerario = fila.getString(fila.getColumnIndex("fecha_itinerario"));
+                itinerario.put("list_id_itinerario",id);
+                itinerario.put("list_name_itinerario",nombre_itinerario);
+                itinerario.put("list_date_itinerario",fecha_itinerario);
+                itinerarioList.add(itinerario);
+                listItinerario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String id_itinerario = itinerario.get(position);
+                    }
+                });
+                fila.moveToNext();
+            }
+            ListAdapter adapter = new SimpleAdapter(this, itinerarioList, R.layout.list_row_itinerario,new String[]{"list_id_itinerario","list_name_itinerario","list_date_itinerario"}, new int[]{R.id.list_id_itinerario, R.id.list_name_itinerario, R.id.list_date_itinerario});
+            listItinerario.setAdapter(adapter);
+        }
     }
 }
