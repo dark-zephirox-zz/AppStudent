@@ -145,6 +145,9 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         String id_itinerario = itinerario.get(position);
+                        Intent initIntent = new Intent(view.getContext(), CrdItinerarioActivity.class);
+                        initIntent.putExtra("idItinerario", id_itinerario.toString());
+                        startActivity(initIntent);
                     }
                 });
                 fila.moveToNext();

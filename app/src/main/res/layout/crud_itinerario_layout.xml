@@ -76,6 +76,7 @@
         android:fontFamily="@font/open_sans"
         android:text="@string/delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateItinerario" />
+        app:layout_constraintTop_toBottomOf="@+id/dateItinerario"
+        android:onClick="delItinerario"/>
 
 </android.support.constraint.ConstraintLayout>

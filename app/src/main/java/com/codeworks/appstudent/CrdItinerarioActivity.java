@@ -56,6 +56,9 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             }
         });
     }
+    public void loadItinerario(){
+
+    }
     public void insItinerario(View v){
         try{
 
@@ -83,8 +86,8 @@ public class CrdItinerarioActivity extends AppCompatActivity {
     public void delItinerario(View v){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
-        String id_itinerario = et1.getText().toString(); //aun falta el id real
-        int cant = db.delete("itinerarios", "id=" + id_itinerario, null);
+        String idItin = getIntent().getStringExtra("idItinerario");
+        int cant = db.delete("itinerarios", "id=" + idItin, null);
         db.close();
         if (cant == 1){
             Toast.makeText(this, "Itinerario eliminado exitosamente!", Toast.LENGTH_SHORT).show();
