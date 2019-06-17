@@ -4,11 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,9 +32,9 @@ public class CrdItinerarioActivity extends AppCompatActivity {
         if (sharedpreferences.contains("NomUsuario")) {
             nomusuario = sharedpreferences.getString("NomUsuario", "");
         }
-        et1 = (EditText) findViewById(R.id.nameItinerario);
-        et2 = (EditText) findViewById(R.id.dateItinerario);
-        ImageButton date = (ImageButton) findViewById(R.id.btnDate);
+        et1 = findViewById(R.id.nameItinerario);
+        et2 = findViewById(R.id.dateItinerario);
+        ImageButton date = findViewById(R.id.btnDate);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,9 +55,20 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             datePickerDialog.show();
             }
         });
+        loadItinerario();
     }
-    public void loadItinerario(){
-
+    public void loadItinerario() {
+        String idItinerario = getIntent().getStringExtra("idItinerario");
+        int idIt = Integer.parseInt(idItinerario);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "AppStudent", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        Cursor fila = db.rawQuery("SELECT nombre_itinerario, fecha_itinerario FROM itinerarios WHERE id=" + idIt, null);
+        if (fila.moveToFirst()) {
+            et1.setText(fila.getString(fila.getColumnIndex("nombre_itinerario")));
+            et2.setText(fila.getString(fila.getColumnIndex("fecha_itinerario")));
+        }else{
+            Toast.makeText(this, "Error al cargar Itinerario", Toast.LENGTH_SHORT).show();
+        }
     }
     public void insItinerario(View v){
         try{
@@ -86,8 +97,9 @@ public class CrdItinerarioActivity extends AppCompatActivity {
     public void delItinerario(View v){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
-        String idItin = getIntent().getStringExtra("idItinerario");
-        int cant = db.delete("itinerarios", "id=" + idItin, null);
+        String idItinerario = getIntent().getStringExtra("idItinerario");
+        int idIt = Integer.parseInt(idItinerario);
+        int cant = db.delete("itinerarios", "id=" + idIt, null);
         db.close();
         if (cant == 1){
             Toast.makeText(this, "Itinerario eliminado exitosamente!", Toast.LENGTH_SHORT).show();

@@ -155,5 +155,6 @@ public class MainActivity extends AppCompatActivity
             ListAdapter adapter = new SimpleAdapter(this, itinerarioList, R.layout.list_row_itinerario,new String[]{"list_id_itinerario","list_name_itinerario","list_date_itinerario"}, new int[]{R.id.list_id_itinerario, R.id.list_name_itinerario, R.id.list_date_itinerario});
             listItinerario.setAdapter(adapter);
         }
+
     }
 }
