@@ -55,7 +55,10 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             datePickerDialog.show();
             }
         });
-        loadItinerario();
+        String idTask = getIntent().getStringExtra("idTask");
+        if (idTask.equals("1")){
+            loadItinerario();
+        }
     }
     public void loadItinerario() {
         String idItinerario = getIntent().getStringExtra("idItinerario");
@@ -70,26 +73,47 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al cargar Itinerario", Toast.LENGTH_SHORT).show();
         }
     }
-    public void insItinerario(View v){
+    public void saveItinerario(View v){
         try{
-
-            String schedulename = et1.getText().toString();
-            String dateschedule = et2.getText().toString();
-            if (schedulename.matches("") || dateschedule.matches("")){
-                Toast.makeText(this, "Por favor, diligenciar todos los campos", Toast.LENGTH_SHORT).show();
-            } else {
+            String idTask = getIntent().getStringExtra("idTask");
+            if (idTask.equals("1")){
                 AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
                 SQLiteDatabase db = admin.getWritableDatabase();
+                String idItinerario = getIntent().getStringExtra("idItinerario");
+                String name_itinerario = et1.getText().toString();
+                String date_itinerario = et2.getText().toString();
                 ContentValues registro = new ContentValues();
-                registro.put("id_usuario", idusuario);
-                registro.put("nombre_itinerario", schedulename);
-                registro.put("fecha_itinerario", dateschedule);
-                db.insert("itinerarios", null, registro);
+                registro.put("nombre_itinerario", name_itinerario);
+                registro.put("fecha_itinerario", date_itinerario);
+                int cant = db.update("itinerarios", registro, "id=" + idItinerario,null);
                 db.close();
-                et1.setText("");
-                et2.setText("");
-                Toast.makeText(this, "Itinerario creado exitosamente!", Toast.LENGTH_SHORT).show();
+                if (cant == 1){
+                    Toast.makeText(this, "Se ha modificado el Itinerario", Toast.LENGTH_SHORT).show();
+                    this.finish();
+                }else{
+                    Toast.makeText(this, "No se pudo editar el Itinerario",Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                String schedulename = et1.getText().toString();
+                String dateschedule = et2.getText().toString();
+                if (schedulename.matches("") || dateschedule.matches("")){
+                    Toast.makeText(this, "Por favor, diligenciar todos los campos", Toast.LENGTH_SHORT).show();
+                } else {
+                    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+                    SQLiteDatabase db = admin.getWritableDatabase();
+                    ContentValues registro = new ContentValues();
+                    registro.put("id_usuario", idusuario);
+                    registro.put("nombre_itinerario", schedulename);
+                    registro.put("fecha_itinerario", dateschedule);
+                    db.insert("itinerarios", null, registro);
+                    db.close();
+                    et1.setText("");
+                    et2.setText("");
+                    Toast.makeText(this, "Itinerario creado exitosamente!", Toast.LENGTH_SHORT).show();
+                    this.finish();
+                }
             }
+
         }catch (Exception e){
             Toast.makeText(this, "Error: "+e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -98,13 +122,13 @@ public class CrdItinerarioActivity extends AppCompatActivity {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
         String idItinerario = getIntent().getStringExtra("idItinerario");
-        int idIt = Integer.parseInt(idItinerario);
-        int cant = db.delete("itinerarios", "id=" + idIt, null);
+        int cant = db.delete("itinerarios", "id=" + idItinerario, null);
         db.close();
         if (cant == 1){
             Toast.makeText(this, "Itinerario eliminado exitosamente!", Toast.LENGTH_SHORT).show();
             et1.setText("");
             et2.setText("");
+            this.finish();
         }else{
             Toast.makeText(this, "No se pudo eliminar el Itinerario", Toast.LENGTH_SHORT).show();
         }

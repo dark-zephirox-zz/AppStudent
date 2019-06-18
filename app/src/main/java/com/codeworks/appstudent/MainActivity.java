@@ -20,17 +20,18 @@ import android.support.v7.widget.Toolbar;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity 
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     SharedPreferences sharedpreferences;
     String idusuario;
     String nomusuario;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity
         if (sharedpreferences.contains("NomUsuario")) {
             nomusuario = sharedpreferences.getString("NomUsuario", "");
         }
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent crdItinerario = new Intent(v.getContext(), CrdItinerarioActivity.class);
+                crdItinerario.putExtra("idTask", "0");
                 startActivity(crdItinerario);
             }
         });
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity
 
     public void loadItinerarios(){
         ArrayList<HashMap<String, String>> itinerarioList = new ArrayList<>();
-        ListView listItinerario = (ListView) findViewById(R.id.list_itinerarios);
+        final ListView listItinerario = (ListView) findViewById(R.id.list_itinerarios);
         listItinerario.setAdapter(null);
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
@@ -144,9 +145,12 @@ public class MainActivity extends AppCompatActivity
                 listItinerario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String id_itinerario = itinerario.get(position);
+                        view = listItinerario.getChildAt(position);
+                        TextView editText = view.findViewById(R.id.list_id_itinerario);
+                        String id_itinerario = editText.getText().toString();
                         Intent initIntent = new Intent(view.getContext(), CrdItinerarioActivity.class);
-                        initIntent.putExtra("idItinerario", id_itinerario.toString());
+                        initIntent.putExtra("idTask", "1");
+                        initIntent.putExtra("idItinerario", id_itinerario);
                         startActivity(initIntent);
                     }
                 });
