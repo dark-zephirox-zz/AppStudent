@@ -1,6 +1,5 @@
 package com.codeworks.appstudent;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,14 +17,10 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
@@ -48,6 +43,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (sharedpreferences.contains("NomUsuario")) {
             nomusuario = sharedpreferences.getString("NomUsuario", "");
         }
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+        ViewFlipper vf = findViewById(R.id.vf);
+        vf.setDisplayedChild(0);
+        /*PARAM ITINERARIO*/
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,15 +70,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(crdItinerario);
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-        ViewFlipper vf = findViewById(R.id.vf);
-        vf.setDisplayedChild(0);
+        /*END ITINERARIO*/
+
+        /*PARAM NOTAS*/
+
+        /*END NOTAS*/
     }
 
     @Override
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void loadItinerarios(){
         ArrayList<HashMap<String, String>> itinerarioList = new ArrayList<>();
-        final ListView listItinerario = (ListView) findViewById(R.id.list_itinerarios);
+        final ListView listItinerario = (ListView) findViewById(R.id.list_notas);
         listItinerario.setAdapter(null);
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();

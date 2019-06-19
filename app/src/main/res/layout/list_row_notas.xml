@@ -7,7 +7,7 @@
     android:padding="5dip">
 
     <TextView
-        android:id="@+id/list_name_itinerario"
+        android:id="@+id/list_name_nota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans"
@@ -15,21 +15,21 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/list_date_itinerario"
+        android:id="@+id/list_score_nota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/list_name_itinerario"
+        android:layout_below="@id/list_name_nota"
         android:layout_marginTop="7dp"
         android:fontFamily="@font/open_sans"
         android:textColor="#343434"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/list_id_itinerario"
+        android:id="@+id/list_id_nota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/list_date_itinerario"
-        android:layout_alignBottom="@+id/list_date_itinerario"
+        android:layout_alignBaseline="@+id/list_score_nota"
+        android:layout_alignBottom="@+id/list_score_nota"
         android:layout_alignParentEnd="true"
         android:textColor="#343434"
         android:textSize="18sp" />
