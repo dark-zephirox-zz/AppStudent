@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.menu_notas) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(2);
+            loadNotas();
         } else if (id == R.id.menu_estadisticas) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(3);
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void loadItinerarios(){
         ArrayList<HashMap<String, String>> itinerarioList = new ArrayList<>();
-        final ListView listItinerario = (ListView) findViewById(R.id.list_itinerario);
+        final ListView listItinerario = (ListView) findViewById(R.id.list_notas);
         listItinerario.setAdapter(null);
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
@@ -160,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ListAdapter adapter = new SimpleAdapter(this, itinerarioList, R.layout.list_row_itinerario,new String[]{"list_id_itinerario","list_name_itinerario","list_date_itinerario"}, new int[]{R.id.list_id_itinerario, R.id.list_name_itinerario, R.id.list_date_itinerario});
             listItinerario.setAdapter(adapter);
         }
-
     }
     public void loadNotas(){
         ArrayList<HashMap<String, String>> notasList = new ArrayList<>();
@@ -189,16 +189,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         view = listNotas.getChildAt(position);
                         TextView editText = view.findViewById(R.id.list_id_nota);
                         String id_nota = editText.getText().toString();
-                        Intent initIntent = new Intent(view.getContext(), CrdItinerarioActivity.class);
+                        Intent initIntent = new Intent(view.getContext(), CrdNotasActivity.class);
                         initIntent.putExtra("idTask", "1");
-                        initIntent.putExtra("idItinerario", id_nota);
+                        initIntent.putExtra("idNota", id_nota);
                         startActivity(initIntent);
                     }
                 });
                 fila.moveToNext();
             }
-            ListAdapter adapter = new SimpleAdapter(this, itinerarioList, R.layout.list_row_itinerario,new String[]{"list_id_itinerario","list_name_itinerario","list_date_itinerario"}, new int[]{R.id.list_id_itinerario, R.id.list_name_itinerario, R.id.list_date_itinerario});
-            listItinerario.setAdapter(adapter);
+            ListAdapter adapter = new SimpleAdapter(this, notasList, R.layout.list_row_notas,new String[]{"list_id_nota","list_name_nota","list_score_nota"}, new int[]{R.id.list_id_nota, R.id.list_name_nota, R.id.list_score_nota});
+            listNotas.setAdapter(adapter);
         }
 
     }
