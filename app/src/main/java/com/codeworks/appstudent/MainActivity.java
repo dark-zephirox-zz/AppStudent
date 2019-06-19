@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void loadItinerarios(){
         ArrayList<HashMap<String, String>> itinerarioList = new ArrayList<>();
-        final ListView listItinerario = (ListView) findViewById(R.id.list_notas);
+        final ListView listItinerario = (ListView) findViewById(R.id.list_itinerario);
         listItinerario.setAdapter(null);
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
@@ -152,6 +152,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Intent initIntent = new Intent(view.getContext(), CrdItinerarioActivity.class);
                         initIntent.putExtra("idTask", "1");
                         initIntent.putExtra("idItinerario", id_itinerario);
+                        startActivity(initIntent);
+                    }
+                });
+                fila.moveToNext();
+            }
+            ListAdapter adapter = new SimpleAdapter(this, itinerarioList, R.layout.list_row_itinerario,new String[]{"list_id_itinerario","list_name_itinerario","list_date_itinerario"}, new int[]{R.id.list_id_itinerario, R.id.list_name_itinerario, R.id.list_date_itinerario});
+            listItinerario.setAdapter(adapter);
+        }
+
+    }
+    public void loadNotas(){
+        ArrayList<HashMap<String, String>> notasList = new ArrayList<>();
+        final ListView listNotas = (ListView) findViewById(R.id.list_notas);
+        listNotas.setAdapter(null);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        Cursor fila = db.rawQuery("SELECT id, nombre_materia, nota1, nota2, nota3 FROM notas WHERE id_usuario="+idusuario , null);
+        if (fila.moveToFirst()) {
+            while (!fila.isAfterLast()) {
+                final HashMap<String,String> notas = new HashMap<>();
+                String id = fila.getString(fila.getColumnIndex("id"));
+                String nombre_materia = fila.getString(fila.getColumnIndex("nombre_materia"));
+                String nota1 = fila.getString(fila.getColumnIndex("nota1"));
+                String nota2 = fila.getString(fila.getColumnIndex("nota2"));
+                String nota3 = fila.getString(fila.getColumnIndex("nota3"));
+                notas.put("list_id_itinerario",id);
+                notas.put("list_name_itinerario",nombre_materia);
+                notas.put("list_date_itinerario",nota1);
+                notas.put("list_date_itinerario",nota2);
+                notas.put("list_date_itinerario",nota3);
+                notasList.add(notas);
+                listNotas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        view = listNotas.getChildAt(position);
+                        TextView editText = view.findViewById(R.id.list_id_nota);
+                        String id_nota = editText.getText().toString();
+                        Intent initIntent = new Intent(view.getContext(), CrdItinerarioActivity.class);
+                        initIntent.putExtra("idTask", "1");
+                        initIntent.putExtra("idItinerario", id_nota);
                         startActivity(initIntent);
                     }
                 });
