@@ -32,7 +32,7 @@ public class CrdNotasActivity extends AppCompatActivity {
         et2 = findViewById(R.id.scoreNota1);
         et3 = findViewById(R.id.scoreNota2);
         et4 = findViewById(R.id.scoreNota3);
-        //et4.setError("Es una prueba, take it easy!", null);
+        et4.setError("Es una prueba, take it easy!", null);
         String idTask = getIntent().getStringExtra("idTask");
         if (idTask.equals("1")){
             loadNotas();
@@ -55,7 +55,7 @@ public class CrdNotasActivity extends AppCompatActivity {
         }
     }
 
-    public void saveItinerario(View v){
+    public void saveNota(View v){
         try{
             String idTask = getIntent().getStringExtra("idTask");
             if (idTask.equals("1")){
@@ -89,22 +89,27 @@ public class CrdNotasActivity extends AppCompatActivity {
                 } else if ((score1.matches("") && score2.matches("") && score3.matches(""))){
                     Toast.makeText(this, "Digita al menos una Nota", Toast.LENGTH_SHORT).show();
                 } else {
-                    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
-                    SQLiteDatabase db = admin.getWritableDatabase();
-                    ContentValues registro = new ContentValues();
-                    registro.put("id_usuario", idusuario);
-                    registro.put("nombre_nota", gradename);
-                    registro.put("nota1", score1);
-                    registro.put("nota2", score2);
-                    registro.put("nota3", score3);
-                    db.insert("notas", null, registro);
-                    db.close();
-                    et1.setText("");
-                    et2.setText("");
-                    et3.setText("");
-                    et4.setText("");
-                    Toast.makeText(this, "Notas de "+ gradename +" creadas exitosamente!", Toast.LENGTH_SHORT).show();
-                    this.finish();
+                    try{
+                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+                        SQLiteDatabase db = admin.getWritableDatabase();
+                        ContentValues registro = new ContentValues();
+                        registro.put("id_usuario", idusuario);
+                        registro.put("nombre_nota", gradename);
+                        registro.put("nota1", score1);
+                        registro.put("nota2", score2);
+                        registro.put("nota3", score3);
+                        db.insert("notas", null, registro);
+                        db.close();
+                        et1.setText("");
+                        et2.setText("");
+                        et3.setText("");
+                        et4.setText("");
+                        Toast.makeText(this, "Notas de "+ gradename +" creadas exitosamente!", Toast.LENGTH_SHORT).show();
+                        this.finish();
+                    }catch (Exception e){
+                        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         }catch (Exception e){

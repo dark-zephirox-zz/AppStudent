@@ -50,7 +50,7 @@
             android:layout_height="49dp"
             android:fontFamily="@font/open_sans"
             android:hint="@string/score_nota1"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="20"
             android:maxLines="1" />
 
@@ -76,7 +76,7 @@
             android:layout_height="49dp"
             android:fontFamily="@font/open_sans"
             android:hint="@string/score_nota2"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="20"
             android:maxLines="1" />
 
@@ -100,7 +100,7 @@
             android:layout_height="49dp"
             android:fontFamily="@font/open_sans"
             android:hint="@string/score_nota3"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="20"
             android:maxLines="1" />
 
@@ -113,8 +113,8 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/open_sans"
+        android:onClick="saveNota"
         android:text="@string/save"
-        android:onClick="saveItinerario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInputScoreNota1" />
 
