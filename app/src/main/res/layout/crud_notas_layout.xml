@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/txtInputLayout"
+        android:id="@+id/txtInputNameNota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,7 +25,81 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
-            android:hint="@string/name_itinerario"
+            android:hint="@string/name_notas"
+            android:inputType="text"
+            android:maxLength="20"
+            android:maxLines="1" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtInputScoreNota1"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:hint=""
+        app:counterEnabled="false"
+        app:counterMaxLength="20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputNameNota">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/scoreNota1"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/score_nota1"
+            android:inputType="text"
+            android:maxLength="20"
+            android:maxLines="1" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtInputScoreNota2"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:hint=""
+        app:counterEnabled="false"
+        app:counterMaxLength="20"
+        app:layout_constraintEnd_toStartOf="@+id/txtInputScoreNota3"
+        app:layout_constraintStart_toEndOf="@+id/txtInputScoreNota1"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputNameNota">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/scoreNota2"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/score_nota2"
+            android:inputType="text"
+            android:maxLength="20"
+            android:maxLines="1" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtInputScoreNota3"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:hint=""
+        app:counterEnabled="false"
+        app:counterMaxLength="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputNameNota">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/scoreNota3"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/score_nota3"
             android:inputType="text"
             android:maxLength="20"
             android:maxLines="1" />
@@ -36,24 +110,23 @@
         android:id="@+id/btnGuardarNotas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/open_sans"
-        android:onClick="saveNotas"
         android:text="@string/save"
+        android:onClick="saveItinerario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateItinerario" />
+        app:layout_constraintTop_toBottomOf="@+id/txtInputScoreNota1" />
 
     <Button
         android:id="@+id/btnEliminarNotas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="72dp"
         android:fontFamily="@font/open_sans"
         android:text="@string/delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateItinerario"
-        android:onClick="delNotas"/>
+        app:layout_constraintTop_toBottomOf="@+id/txtInputScoreNota3" />
 
 </android.support.constraint.ConstraintLayout>

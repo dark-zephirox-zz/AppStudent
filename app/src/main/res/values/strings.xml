@@ -27,4 +27,8 @@
     <string name="save">Guardar</string>
     <string name="delete">Eliminar</string>
     <string name="user_phone">Telefono</string>
+    <string name="name_notas">Nombre de la Materia</string>
+    <string name="score_nota1">Nota 1</string>
+    <string name="score_nota2">Nota 2</string>
+    <string name="score_nota3">Nota 3</string>
 </resources>

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         ViewFlipper vf = findViewById(R.id.vf);
         vf.setDisplayedChild(0);
-        /*PARAM ITINERARIO*/
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .setAction("Action", null).show();
             }
         });
+        /*PARAM ITINERARIO*/
         FloatingActionButton fab_itin = findViewById(R.id.fab_itinerario);
         fab_itin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +74,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /*END ITINERARIO*/
 
         /*PARAM NOTAS*/
-
+        FloatingActionButton fab_notas = findViewById(R.id.fab_notas);
+        fab_notas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent crdNotas = new Intent(v.getContext(), CrdNotasActivity.class);
+                crdNotas.putExtra("idTask", "0");
+                startActivity(crdNotas);
+            }
+        });
         /*END NOTAS*/
     }
 
@@ -81,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         loadItinerarios();
+        loadNotas();
     }
 
     @Override
@@ -129,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void loadItinerarios(){
         ArrayList<HashMap<String, String>> itinerarioList = new ArrayList<>();
-        final ListView listItinerario = (ListView) findViewById(R.id.list_notas);
+        final ListView listItinerario = (ListView) findViewById(R.id.list_itinerario);
         listItinerario.setAdapter(null);
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
@@ -177,11 +187,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String nota1 = fila.getString(fila.getColumnIndex("nota1"));
                 String nota2 = fila.getString(fila.getColumnIndex("nota2"));
                 String nota3 = fila.getString(fila.getColumnIndex("nota3"));
-                notas.put("list_id_itinerario",id);
-                notas.put("list_name_itinerario",nombre_materia);
-                notas.put("list_date_itinerario",nota1);
-                notas.put("list_date_itinerario",nota2);
-                notas.put("list_date_itinerario",nota3);
+                String score_notas = "Nota 1: "+ nota1 +", Nota 2: "+ nota2 +", Nota 3: "+ nota3;
+                notas.put("list_id_nota",id);
+                notas.put("list_name_nota",nombre_materia);
+                notas.put("list_score_nota",score_notas);
                 notasList.add(notas);
                 listNotas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

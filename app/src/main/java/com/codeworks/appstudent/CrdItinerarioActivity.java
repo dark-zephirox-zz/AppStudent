@@ -60,6 +60,7 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             loadItinerario();
         }
     }
+
     public void loadItinerario() {
         String idItinerario = getIntent().getStringExtra("idItinerario");
         int idIt = Integer.parseInt(idItinerario);
@@ -73,6 +74,7 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al cargar Itinerario", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void saveItinerario(View v){
         try{
             String idTask = getIntent().getStringExtra("idTask");
@@ -118,6 +120,7 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             Toast.makeText(this, "Error: "+e.toString(), Toast.LENGTH_LONG).show();
         }
     }
+
     public void delItinerario(View v){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
