@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.text.TextWatcher;
 import android.widget.Toast;
@@ -37,22 +39,35 @@ public class CrdNotasActivity extends AppCompatActivity {
         if (idTask.equals("1")){
             loadNotas();
         }
+        /*Button save = findViewById(R.id.btnGuardarNotas);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveNota(view);
+            }
+        });*/
     }
 
     public void loadNotas(){
-        String idNotas = getIntent().getStringExtra("idNotas");
-        int idNt = Integer.parseInt(idNotas);
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "AppStudent", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();
-        Cursor fila = db.rawQuery("SELECT nombre_materia, nota1, nota2, nota3 FROM notas WHERE id=" + idNt, null);
-        if (fila.moveToFirst()) {
-            et1.setText(fila.getString(fila.getColumnIndex("nombre_materia")));
-            et2.setText(fila.getString(fila.getColumnIndex("nota1")));
-            et3.setText(fila.getString(fila.getColumnIndex("nota2")));
-            et4.setText(fila.getString(fila.getColumnIndex("nota3")));
-        }else{
-            Toast.makeText(this, "Error al cargar Notas", Toast.LENGTH_SHORT).show();
+
+        try{
+            String idNotas = getIntent().getStringExtra("idNotas");
+            int idNt = Integer.parseInt(idNotas);
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "AppStudent", null, 1);
+            SQLiteDatabase db = admin.getWritableDatabase();
+            Cursor fila = db.rawQuery("SELECT nombre_materia, nota1, nota2, nota3 FROM notas WHERE id=" + idNt, null);
+            if (fila.moveToFirst()) {
+                et1.setText(fila.getString(fila.getColumnIndex("nombre_materia")));
+                et2.setText(fila.getString(fila.getColumnIndex("nota1")));
+                et3.setText(fila.getString(fila.getColumnIndex("nota2")));
+                et4.setText(fila.getString(fila.getColumnIndex("nota3")));
+            }else{
+                Toast.makeText(this, "Error al cargar Notas", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
         }
+
     }
 
     public void saveNota(View v){
@@ -66,11 +81,14 @@ public class CrdNotasActivity extends AppCompatActivity {
                 String score_nota1 = et2.getText().toString();
                 String score_nota2 = et3.getText().toString();
                 String score_nota3 = et4.getText().toString();
+                Double scorenota1 = Double.parseDouble(score_nota1);
+                Double scorenota2 = Double.parseDouble(score_nota2);
+                Double scorenota3 = Double.parseDouble(score_nota3);
                 ContentValues registro = new ContentValues();
                 registro.put("nombre_materia", name_materia);
-                registro.put("nota1", score_nota1);
-                registro.put("nota2", score_nota2);
-                registro.put("nota3", score_nota3);
+                registro.put("nota1", scorenota1);
+                registro.put("nota2", scorenota2);
+                registro.put("nota3", scorenota3);
                 int cant = db.update("notas", registro, "id=" + idNota,null);
                 db.close();
                 if (cant == 1){
@@ -94,7 +112,7 @@ public class CrdNotasActivity extends AppCompatActivity {
                         SQLiteDatabase db = admin.getWritableDatabase();
                         ContentValues registro = new ContentValues();
                         registro.put("id_usuario", idusuario);
-                        registro.put("nombre_nota", gradename);
+                        registro.put("nombre_materia", gradename);
                         registro.put("nota1", score1);
                         registro.put("nota2", score2);
                         registro.put("nota3", score3);

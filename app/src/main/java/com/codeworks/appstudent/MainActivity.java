@@ -210,6 +210,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ListAdapter adapter = new SimpleAdapter(this, notasList, R.layout.list_row_notas,new String[]{"list_id_nota","list_name_nota","list_score_nota"}, new int[]{R.id.list_id_nota, R.id.list_name_nota, R.id.list_score_nota});
             listNotas.setAdapter(adapter);
         }
-
     }
 }

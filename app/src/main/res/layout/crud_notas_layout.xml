@@ -50,7 +50,7 @@
             android:layout_height="49dp"
             android:fontFamily="@font/open_sans"
             android:hint="@string/score_nota1"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:maxLength="20"
             android:maxLines="1" />
 
@@ -76,7 +76,7 @@
             android:layout_height="49dp"
             android:fontFamily="@font/open_sans"
             android:hint="@string/score_nota2"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:maxLength="20"
             android:maxLines="1" />
 
@@ -100,7 +100,7 @@
             android:layout_height="49dp"
             android:fontFamily="@font/open_sans"
             android:hint="@string/score_nota3"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:maxLength="20"
             android:maxLines="1" />
 
