@@ -39,19 +39,12 @@ public class CrdNotasActivity extends AppCompatActivity {
         if (idTask.equals("1")){
             loadNotas();
         }
-        /*Button save = findViewById(R.id.btnGuardarNotas);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveNota(view);
-            }
-        });*/
     }
 
     public void loadNotas(){
 
         try{
-            String idNotas = getIntent().getStringExtra("idNotas");
+            String idNotas = getIntent().getStringExtra("idNota");
             int idNt = Integer.parseInt(idNotas);
             AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "AppStudent", null, 1);
             SQLiteDatabase db = admin.getWritableDatabase();
@@ -81,14 +74,14 @@ public class CrdNotasActivity extends AppCompatActivity {
                 String score_nota1 = et2.getText().toString();
                 String score_nota2 = et3.getText().toString();
                 String score_nota3 = et4.getText().toString();
-                Double scorenota1 = Double.parseDouble(score_nota1);
+                /*Double scorenota1 = Double.parseDouble(score_nota1);
                 Double scorenota2 = Double.parseDouble(score_nota2);
-                Double scorenota3 = Double.parseDouble(score_nota3);
+                Double scorenota3 = Double.parseDouble(score_nota3);*/
                 ContentValues registro = new ContentValues();
                 registro.put("nombre_materia", name_materia);
-                registro.put("nota1", scorenota1);
-                registro.put("nota2", scorenota2);
-                registro.put("nota3", scorenota3);
+                registro.put("nota1", score_nota1);
+                registro.put("nota2", score_nota2);
+                registro.put("nota3", score_nota3);
                 int cant = db.update("notas", registro, "id=" + idNota,null);
                 db.close();
                 if (cant == 1){
@@ -132,6 +125,23 @@ public class CrdNotasActivity extends AppCompatActivity {
             }
         }catch (Exception e){
             Toast.makeText(this, "Error: "+e.toString(), Toast.LENGTH_LONG).show();
+        }
+    }
+    public void delNota(View v){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        String idNota = getIntent().getStringExtra("idNota");
+        int cant = db.delete("notas", "id=" + idNota, null);
+        db.close();
+        if (cant == 1){
+            Toast.makeText(this, "Materia eliminada exitosamente!", Toast.LENGTH_SHORT).show();
+            et1.setText("");
+            et2.setText("");
+            et3.setText("");
+            et4.setText("");
+            this.finish();
+        }else{
+            Toast.makeText(this, "No se pudo eliminar la Materia", Toast.LENGTH_SHORT).show();
         }
     }
 }
