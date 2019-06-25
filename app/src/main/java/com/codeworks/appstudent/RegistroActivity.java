@@ -43,6 +43,9 @@ public class RegistroActivity extends AppCompatActivity {
             et3.setText("");
             et4.setText("");
             Toast.makeText(this, "Usuario creado exitosamente!", Toast.LENGTH_SHORT).show();
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Registro de Usuario')");
+            db.close();
             Intent intent = new Intent(v.getContext(), LoginActivity.class);
             startActivity(intent);
         }

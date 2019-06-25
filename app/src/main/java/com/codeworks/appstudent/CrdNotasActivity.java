@@ -34,7 +34,6 @@ public class CrdNotasActivity extends AppCompatActivity {
         et2 = findViewById(R.id.scoreNota1);
         et3 = findViewById(R.id.scoreNota2);
         et4 = findViewById(R.id.scoreNota3);
-        et4.setError("Es una prueba, take it easy!", null);
         String idTask = getIntent().getStringExtra("idTask");
         if (idTask.equals("1")){
             loadNotas();
@@ -42,7 +41,6 @@ public class CrdNotasActivity extends AppCompatActivity {
     }
 
     public void loadNotas(){
-
         try{
             String idNotas = getIntent().getStringExtra("idNota");
             int idNt = Integer.parseInt(idNotas);
@@ -60,7 +58,6 @@ public class CrdNotasActivity extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
         }
-
     }
 
     public void saveNota(View v){
@@ -74,9 +71,15 @@ public class CrdNotasActivity extends AppCompatActivity {
                 String score_nota1 = et2.getText().toString();
                 String score_nota2 = et3.getText().toString();
                 String score_nota3 = et4.getText().toString();
-                /*Double scorenota1 = Double.parseDouble(score_nota1);
-                Double scorenota2 = Double.parseDouble(score_nota2);
-                Double scorenota3 = Double.parseDouble(score_nota3);*/
+                if (score_nota1.matches("")){
+                    score_nota1 = "0";
+                }
+                if (score_nota2.matches("")){
+                    score_nota2 = "0";
+                }
+                if (score_nota3.matches("")){
+                    score_nota3 = "0";
+                }
                 ContentValues registro = new ContentValues();
                 registro.put("nombre_materia", name_materia);
                 registro.put("nota1", score_nota1);
@@ -103,6 +106,15 @@ public class CrdNotasActivity extends AppCompatActivity {
                     try{
                         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
                         SQLiteDatabase db = admin.getWritableDatabase();
+                        if (score1.matches("")){
+                            score1 = "0";
+                        }
+                        if (score2.matches("")){
+                            score2 = "0";
+                        }
+                        if (score3.matches("")){
+                            score3 = "0";
+                        }
                         ContentValues registro = new ContentValues();
                         registro.put("id_usuario", idusuario);
                         registro.put("nombre_materia", gradename);
@@ -120,7 +132,6 @@ public class CrdNotasActivity extends AppCompatActivity {
                     }catch (Exception e){
                         Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
         }catch (Exception e){

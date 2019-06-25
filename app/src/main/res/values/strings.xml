@@ -31,4 +31,9 @@
     <string name="score_nota1">Nota 1</string>
     <string name="score_nota2">Nota 2</string>
     <string name="score_nota3">Nota 3</string>
+    <string name="rec_audio">Iniciar Grabación</string>
+    <string name="stop_rec_audio">Detener Grabación</string>
+    <string name="play_rec">Reproducir Grabación</string>
+    <string name="stop_rec">Detener Grabación</string>
+    <string name="rec_name">Nombre de Audio</string>
 </resources>

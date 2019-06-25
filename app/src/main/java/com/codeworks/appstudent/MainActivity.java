@@ -17,6 +17,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -24,8 +25,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     SharedPreferences sharedpreferences;
@@ -85,6 +93,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         /*END NOTAS*/
+
+        /*PARAM GRABADORA*/
+        Button btnRec = findViewById(R.id.btnGoToRec);
+        btnRec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent recAudio = new Intent(v.getContext(), RecorderActivity.class);
+                startActivity(recAudio);
+            }
+        });
+        /*END REC*/
     }
 
     @Override

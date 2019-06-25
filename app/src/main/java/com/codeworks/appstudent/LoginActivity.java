@@ -58,6 +58,9 @@ public class LoginActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(mainIntent);
                 Toast.makeText(this, "Ingreso exitoso", Toast.LENGTH_SHORT).show();
+                db = admin.getWritableDatabase();
+                db.execSQL("INSERT INTO operaciones (registro) VALUES ('Ingreso de Usuario')");
+                db.close();
             } else {
                 Toast.makeText(this, "Credenciales incorrectas, intentalo de nuevo!", Toast.LENGTH_SHORT).show();
             }
