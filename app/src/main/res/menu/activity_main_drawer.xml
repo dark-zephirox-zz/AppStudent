@@ -25,6 +25,10 @@
     <item android:title="@string/item_acciones">
         <menu>
             <item
+                android:id="@+id/menu_log"
+                android:icon="@drawable/ic_bug_report"
+                android:title="@string/log_acciones"/>
+            <item
                 android:id="@+id/menu_logout"
                 android:icon="@drawable/ic_phonelink_erase"
                 android:title="@string/log_out"/>

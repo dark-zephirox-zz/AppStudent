@@ -91,6 +91,9 @@ public class CrdItinerarioActivity extends AppCompatActivity {
                 db.close();
                 if (cant == 1){
                     Toast.makeText(this, "Se ha modificado el Itinerario", Toast.LENGTH_SHORT).show();
+                    db = admin.getWritableDatabase();
+                    db.execSQL("INSERT INTO operaciones (registro) VALUES ('Itinerario Modificado')");
+                    db.close();
                     this.finish();
                 }else{
                     Toast.makeText(this, "No se pudo editar el Itinerario",Toast.LENGTH_SHORT).show();
@@ -112,6 +115,9 @@ public class CrdItinerarioActivity extends AppCompatActivity {
                     et1.setText("");
                     et2.setText("");
                     Toast.makeText(this, "Itinerario creado exitosamente!", Toast.LENGTH_SHORT).show();
+                    db = admin.getWritableDatabase();
+                    db.execSQL("INSERT INTO operaciones (registro) VALUES ('Itinerario Creado')");
+                    db.close();
                     this.finish();
                 }
             }
@@ -132,6 +138,9 @@ public class CrdItinerarioActivity extends AppCompatActivity {
             et1.setText("");
             et2.setText("");
             this.finish();
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Itinerario Eliminado')");
+            db.close();
         }else{
             Toast.makeText(this, "No se pudo eliminar el Itinerario", Toast.LENGTH_SHORT).show();
         }

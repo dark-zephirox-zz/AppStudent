@@ -89,6 +89,9 @@ public class CrdNotasActivity extends AppCompatActivity {
                 db.close();
                 if (cant == 1){
                     Toast.makeText(this, "Se ha modificado las notas de "+name_materia, Toast.LENGTH_SHORT).show();
+                    db = admin.getWritableDatabase();
+                    db.execSQL("INSERT INTO operaciones (registro) VALUES ('Materia y Notas editadas')");
+                    db.close();
                     this.finish();
                 }else{
                     Toast.makeText(this, "No se pudieron editar las notas de "+name_materia,Toast.LENGTH_SHORT).show();
@@ -128,6 +131,9 @@ public class CrdNotasActivity extends AppCompatActivity {
                         et3.setText("");
                         et4.setText("");
                         Toast.makeText(this, "Notas de "+ gradename +" creadas exitosamente!", Toast.LENGTH_SHORT).show();
+                        db = admin.getWritableDatabase();
+                        db.execSQL("INSERT INTO operaciones (registro) VALUES ('Materia y Notas creadas')");
+                        db.close();
                         this.finish();
                     }catch (Exception e){
                         Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -150,6 +156,9 @@ public class CrdNotasActivity extends AppCompatActivity {
             et2.setText("");
             et3.setText("");
             et4.setText("");
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Materia Eliminada')");
+            db.close();
             this.finish();
         }else{
             Toast.makeText(this, "No se pudo eliminar la Materia", Toast.LENGTH_SHORT).show();

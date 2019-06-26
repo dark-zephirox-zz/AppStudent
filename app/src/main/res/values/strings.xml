@@ -13,6 +13,7 @@
     <string name="menu_estadisticas">Estadísticas</string>
     <string name="menu_grabadora">Grabadora</string>
     <string name="item_acciones">Acciones</string>
+    <string name="log_acciones">Ultimas Acciones</string>
     <string name="username_login">Nº Documento</string>
     <string name="password_login">Contraseña</string>
     <string name="register_login">Registrate!</string>
@@ -36,4 +37,5 @@
     <string name="play_rec">Reproducir Grabación</string>
     <string name="stop_rec">Detener Grabación</string>
     <string name="rec_name">Nombre de Audio</string>
+    <string name="title_acciones">Ultimas 5 Acciones</string>
 </resources>

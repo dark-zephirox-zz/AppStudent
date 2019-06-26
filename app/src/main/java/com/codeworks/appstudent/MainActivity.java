@@ -134,16 +134,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(1);
             loadItinerarios();
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+            SQLiteDatabase db = admin.getWritableDatabase();
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Ingreso a Itinerario')");
+            db.close();
         } else if (id == R.id.menu_notas) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(2);
             loadNotas();
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+            SQLiteDatabase db = admin.getWritableDatabase();
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Ingreso a Notas')");
+            db.close();
         } else if (id == R.id.menu_estadisticas) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(3);
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+            SQLiteDatabase db = admin.getWritableDatabase();
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Ingreso a Estadisticas')");
+            db.close();
         } else if (id == R.id.menu_grabadora) {
             ViewFlipper vf = findViewById(R.id.vf);
             vf.setDisplayedChild(4);
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+            SQLiteDatabase db = admin.getWritableDatabase();
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Ingreso a Grabadora')");
+            db.close();
+        } else if (id == R.id.menu_log) {
+            ViewFlipper vf = findViewById(R.id.vf);
+            vf.setDisplayedChild(5);
         } else if (id == R.id.menu_logout) {
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString("IdUsuario", "");
@@ -151,6 +174,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             editor.commit();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+            SQLiteDatabase db = admin.getWritableDatabase();
+            db = admin.getWritableDatabase();
+            db.execSQL("INSERT INTO operaciones (registro) VALUES ('Sesión Terminada')");
+            db.close();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -228,6 +256,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             ListAdapter adapter = new SimpleAdapter(this, notasList, R.layout.list_row_notas,new String[]{"list_id_nota","list_name_nota","list_score_nota"}, new int[]{R.id.list_id_nota, R.id.list_name_nota, R.id.list_score_nota});
             listNotas.setAdapter(adapter);
+        }
+    }
+
+    public void loadAcciones(){
+        ArrayList<HashMap<String, String>> accList = new ArrayList<>();
+        final ListView listAcciones = (ListView) findViewById(R.id.list_acciones);
+        listAcciones.setAdapter(null);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"AppStudent", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        Cursor fila = db.rawQuery("SELECT id, operacion FROM operaciones", null);
+        if (fila.moveToFirst()) {
+            while (!fila.isAfterLast()) {
+                final HashMap<String,String> acciones = new HashMap<>();
+                String id = fila.getString(fila.getColumnIndex("id"));
+                String nombre_materia = fila.getString(fila.getColumnIndex("nombre_materia"));
+                acciones.put("list_id_nota",id);
+                acciones.put("list_name_nota",nombre_materia);
+                accList.add(acciones);
+                listAcciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        view = listAcciones.getChildAt(position);
+                        TextView editText = view.findViewById(R.id.list_id_nota);
+                        String id_nota = editText.getText().toString();
+                        Intent initIntent = new Intent(view.getContext(), CrdNotasActivity.class);
+                        initIntent.putExtra("idTask", "1");
+                        initIntent.putExtra("idNota", id_nota);
+                        startActivity(initIntent);
+                    }
+                });
+                fila.moveToNext();
+            }
+            ListAdapter adapter = new SimpleAdapter(this, accList, R.layout.list_row_notas,new String[]{"list_id_nota","list_name_nota","list_score_nota"}, new int[]{R.id.list_id_nota, R.id.list_name_nota, R.id.list_score_nota});
+            listAcciones.setAdapter(adapter);
         }
     }
 }
